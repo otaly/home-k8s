@@ -1,2 +1,2 @@
 # home-k8s
-home k8s manifests.
+[おうちk8s](https://developers.cyberagent.co.jp/blog/archives/27443/)用のマニフェストファイル等を置く場所。
