@@ -22,14 +22,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: noto-nodeport
+  name: noto-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-  - name: "http-port"
-    protocol: "TCP"
-    port: 81
+  - name: http-port
+    protocol: TCP
+    port: 80
     targetPort: web
-    nodePort: 30081
   selector:
     app: noto

@@ -65,12 +65,11 @@ metadata:
   name: registry-front-nodeport
   namespace: registry
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-  - name: "http-port"
-    protocol: "TCP"
+  - name: http-port
+    protocol: TCP
     port: 80
     targetPort: http
-    nodePort: 30080
   selector:
     app: registry-front
