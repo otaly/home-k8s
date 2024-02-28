@@ -13,11 +13,19 @@ spec:
         app: noto
     spec:
       containers:
-      - name: noto
-        image: k8s1:5000/noto:latest
-        ports:
-        - name: web
-          containerPort: 80
+        - name: noto
+          image: k8s1:5000/noto:latest
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 80
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d/
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-config
 ---
 apiVersion: v1
 kind: Service
@@ -26,9 +34,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - name: http-port
-    protocol: TCP
-    port: 80
-    targetPort: web
+    - name: http-port
+      protocol: TCP
+      port: 80
+      targetPort: web
   selector:
     app: noto
